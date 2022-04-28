@@ -11,7 +11,12 @@ config_version=4
 [application]
 
 config/name="Advanced Navigation Plugin Demos"
+run/main_scene="res://3d/SimpleStaticNavmesh.tscn"
 config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/godot-advanced-navigation-plugin/plugin.cfg" )
 
 [physics]
 
