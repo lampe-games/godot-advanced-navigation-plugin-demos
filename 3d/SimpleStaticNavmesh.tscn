@@ -1,8 +1,21 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://addons/godot-advanced-navigation-plugin/nodes/AdvancedNavigationMesh3D.gdns" type="Script" id=1]
 
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 0.5, 0.5, 0.5 )
+
 [node name="Demo" type="Spatial"]
 
-[node name="AdvancedNavigationMesh3D2" type="Spatial" parent="."]
+[node name="AdvancedNavigationMesh3D" type="Spatial" parent="."]
 script = ExtResource( 1 )
+baked = true
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 10.2029, 8.33063, 10.2029 )
+projection = 1
+size = 10.0
