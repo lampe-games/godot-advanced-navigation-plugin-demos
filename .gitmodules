@@ -1,3 +1,4 @@
 [submodule "addons/godot-advanced-navigation-plugin"]
 	path = addons/godot-advanced-navigation-plugin
 	url = git@github.com:lampe-games/godot-advanced-navigation-plugin.git
+	ignore = dirty

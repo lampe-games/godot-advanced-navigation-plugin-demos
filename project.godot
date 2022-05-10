@@ -14,6 +14,10 @@ config/name="Advanced Navigation Plugin Demos"
 run/main_scene="res://3d/SimpleStaticNavmesh.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+AdvancedNavigationServer3D="*res://addons/godot-advanced-navigation-plugin/nodes/AdvancedNavigationServer3D.gdns"
+
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/godot-advanced-navigation-plugin/plugin.cfg" )
