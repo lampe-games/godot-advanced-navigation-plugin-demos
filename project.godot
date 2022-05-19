@@ -20,7 +20,7 @@ AdvancedNavigationServer3D="*res://addons/godot-advanced-navigation-plugin/nodes
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/godot-advanced-navigation-plugin/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/godot-advanced-navigation-plugin/plugin.cfg", "res://addons/gut/plugin.cfg" )
 
 [physics]
 
