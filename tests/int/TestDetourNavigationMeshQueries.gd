@@ -5,6 +5,7 @@ const EPSILON3 = Vector3(0.01, 0.01, 0.01)
 
 # TODO: move those to GUT maybe and add proper prints(?)
 
+
 func assert_almost_eq_v3(vec_a, vec_b):
 	"""GUT has some problems with Vec3 arrays"""
 	assert_almost_eq(vec_a, vec_b, EPSILON3)
@@ -109,7 +110,9 @@ func test_get_simple_path_failed():
 	# navmesh:
 	var navmesh = AdvancedNavigationServer3D.create_empty_detour_navigation_mesh()
 	navmesh.build_from_input_geometry(input_geometry, recast_config, detour_config)
-	var path = navmesh.get_simple_path(Vector3(-1000, -1000, -1000), Vector3(-999, -999, -999))
+	var path = navmesh.get_simple_path(
+		Vector3(-1000, -1000, -1000), Vector3(-999, -999, -999), true
+	)
 	var expected_path = []
 	assert_almost_eq_v3arr(path, expected_path)
 
@@ -128,8 +131,39 @@ func test_get_simple_path_succeeded():
 	# navmesh:
 	var navmesh = AdvancedNavigationServer3D.create_empty_detour_navigation_mesh()
 	navmesh.build_from_input_geometry(input_geometry, recast_config, detour_config)
-	var path = navmesh.get_simple_path(Vector3(-10, 0, -10), Vector3(10, 0, 10))
+	var path = navmesh.get_simple_path(Vector3(-10, 0, -10), Vector3(10, 0, 10), true)
 	var expected_path = [Vector3(-4.1, 0.2, -4.1), Vector3(4, 0.2, 4)]
+	assert_almost_eq_v3arr(path, expected_path)
+
+
+func test_get_simple_path_nonsimplified_for_moderate_geometry_succeeded():
+	# input:
+	var input_geometry = AdvancedNavigationServer3D.create_empty_input_geometry()
+	var plane_mesh = PlaneMesh.new()
+	plane_mesh.size = Vector2(10, 10)
+	input_geometry.add_resources_with_transforms(
+		[plane_mesh, plane_mesh, plane_mesh],
+		[
+			Transform(Basis(), Vector3(0, 0, 0)),
+			Transform(Basis(), Vector3(5, 0, 0)),
+			Transform(Basis(), Vector3(5, 0, 5))
+		]
+	)
+
+	# config:
+	var recast_config = AdvancedNavigationServer3D.create_empty_recast_polygon_mesh_config()
+	var detour_config = AdvancedNavigationServer3D.create_empty_detour_navigation_mesh_config()
+
+	# navmesh:
+	var navmesh = AdvancedNavigationServer3D.create_empty_detour_navigation_mesh()
+	navmesh.build_from_input_geometry(input_geometry, recast_config, detour_config)
+	var path = navmesh.get_simple_path(Vector3(-10, 0, 10), Vector3(15, 0, 15), false)
+	var expected_path = [
+		Vector3(-4.1, 0.2, 4.3),
+		Vector3(0.1, 0.2, 4.3),
+		Vector3(1.041861, 0.2, 4.802326),
+		Vector3(9.1, 0.2, 9.1)
+	]
 	assert_almost_eq_v3arr(path, expected_path)
 
 
@@ -154,6 +188,6 @@ func test_get_simple_path_for_moderate_geometry_succeeded():
 	# navmesh:
 	var navmesh = AdvancedNavigationServer3D.create_empty_detour_navigation_mesh()
 	navmesh.build_from_input_geometry(input_geometry, recast_config, detour_config)
-	var path = navmesh.get_simple_path(Vector3(-10, 0, 10), Vector3(15, 0, 15))
+	var path = navmesh.get_simple_path(Vector3(-10, 0, 10), Vector3(15, 0, 15), true)
 	var expected_path = [Vector3(-4.1, 0.2, 4.3), Vector3(0.1, 0.2, 4.3), Vector3(9.1, 0.2, 9.1)]
 	assert_almost_eq_v3arr(path, expected_path)
