@@ -52,7 +52,7 @@ func test_get_closest_point_succeeded():
 	navmesh.build_from_input_geometry(input_geometry, recast_config, detour_config)
 	assert_almost_eq_v3(navmesh.get_closest_point(Vector3(0, 5, 0)), Vector3(0, 0.2, 0))
 	assert_almost_eq_v3(navmesh.get_closest_point(Vector3(-10, 0, -10)), Vector3(-4.1, 0.2, -4.1))
-	assert_almost_eq_v3(navmesh.get_closest_point(Vector3(10, 0, 10), null), Vector3(4, 0.2, 4))
+	assert_almost_eq_v3(navmesh.get_closest_point(Vector3(10, 0, 10)), Vector3(4, 0.2, 4))
 
 
 func test_get_closest_point_with_extents_failed():
