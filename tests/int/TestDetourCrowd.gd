@@ -116,9 +116,10 @@ func test_small_step_for_agent_but_big_setp_for_mankind():
 	var agent_1_config = AdvancedNavigationServer3D.create_empty_detour_crowd_agent_config()
 	assert_true(agent_1_config != null)
 	var agent_1_start_pos = navmesh.get_closest_point(Vector3(-5, 0, -5))
-	var agent_1 = crowd.create_agent(agent_1_start_pos, agent_1_config) # consider auto-alignment so that we don't need to "get_closest_point"
+	var agent_1 = crowd.create_agent(agent_1_start_pos, agent_1_config)  # consider auto-alignment so that we don't need to "get_closest_point"
 	assert_true(agent_1 != null)
 	assert_eq(agent_1.state, agent_1.STATE_WALKING)
 	var agent_1_actual_pos = agent_1.position
 	assert_almost_eq_v3(agent_1_actual_pos, Vector3(-4.1, 0.2, -4.1))
 	assert_true(agent_1.set_target(Vector3(5, 0, 5)))
+	assert_almost_eq_v3(agent_1.get_target(), Vector3(4.0, 0.2, 4.0))
