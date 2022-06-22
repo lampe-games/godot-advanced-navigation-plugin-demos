@@ -124,3 +124,112 @@ func test_small_step_for_agent_but_big_setp_for_mankind():
 	assert_almost_eq_v3(agent_1.get_target(), Vector3(4.0, 0.2, 4.0))
 	crowd.update(999.0)
 	assert_almost_eq_v3(agent_1.position, Vector3(4.0, 0.2, 4.0))
+
+
+func test_agent_acceleration_and_speed():
+	# input:
+	var input_geometry = AdvancedNavigationServer3D.create_empty_input_geometry()
+	var plane_mesh = PlaneMesh.new()
+	plane_mesh.size = Vector2(100, 100)
+	input_geometry.add_resources([plane_mesh])
+
+	# config:
+	var recast_config = AdvancedNavigationServer3D.create_empty_recast_polygon_mesh_config()
+	var detour_config = AdvancedNavigationServer3D.create_empty_detour_navigation_mesh_config()
+	var crowd_config = AdvancedNavigationServer3D.create_empty_detour_crowd_config()
+
+	# navmesh:
+	var navmesh = AdvancedNavigationServer3D.create_empty_detour_navigation_mesh()
+	navmesh.build_from_input_geometry(input_geometry, recast_config, detour_config)
+
+	# crowd:
+	var crowd = navmesh.create_crowd(crowd_config)
+	var agent_1_config = AdvancedNavigationServer3D.create_empty_detour_crowd_agent_config()
+	agent_1_config.max_acceleration = 1.0
+	agent_1_config.max_speed = 3.0
+	var agent_1_start_pos = navmesh.get_closest_point(Vector3(0, 0, 0))
+	var agent_1 = crowd.create_agent(agent_1_start_pos, agent_1_config)  # consider auto-alignment so that we don't need to "get_closest_point"
+	assert_eq(agent_1.state, agent_1.STATE_WALKING)
+	assert_almost_eq_v3(agent_1.position, Vector3(0.0, 0.2, 0.0))
+	assert_true(agent_1.set_target(Vector3(20, 0, 0)))
+	assert_almost_eq_v3(agent_1.get_target(), Vector3(20.0, 0.2, 0.0))
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(1.0, 0.2, 0.0))
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(3.0, 0.2, 0.0))
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(6.0, 0.2, 0.0))
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(9.0, 0.2, 0.0))
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(12.0, 0.2, 0.0))
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(15.0, 0.2, 0.0))
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(18.0, 0.2, 0.0))
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(21.0, 0.2, 0.0))  # overshoot
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(23.0, 0.2, 0.0))  # slowing down
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(24.0, 0.2, 0.0))  # slowing down
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(24.0, 0.2, 0.0))  # going back
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(23.0, 0.2, 0.0))  # going back
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(21.0, 0.2, 0.0))  # going back
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(18.5, 0.2, 0.0))  # overshoot again
+
+
+func test_agent_acceleration_and_speed_with_dense_updates():
+	# input:
+	var input_geometry = AdvancedNavigationServer3D.create_empty_input_geometry()
+	var plane_mesh = PlaneMesh.new()
+	plane_mesh.size = Vector2(100, 100)
+	input_geometry.add_resources([plane_mesh])
+
+	# config:
+	var recast_config = AdvancedNavigationServer3D.create_empty_recast_polygon_mesh_config()
+	var detour_config = AdvancedNavigationServer3D.create_empty_detour_navigation_mesh_config()
+	var crowd_config = AdvancedNavigationServer3D.create_empty_detour_crowd_config()
+
+	# navmesh:
+	var navmesh = AdvancedNavigationServer3D.create_empty_detour_navigation_mesh()
+	navmesh.build_from_input_geometry(input_geometry, recast_config, detour_config)
+
+	# crowd:
+	var crowd = navmesh.create_crowd(crowd_config)
+	var agent_1_config = AdvancedNavigationServer3D.create_empty_detour_crowd_agent_config()
+	agent_1_config.max_acceleration = 1.0
+	agent_1_config.max_speed = 3.0
+	var agent_1_start_pos = navmesh.get_closest_point(Vector3(0, 0, 0))
+	var agent_1 = crowd.create_agent(agent_1_start_pos, agent_1_config)  # consider auto-alignment so that we don't need to "get_closest_point"
+	assert_eq(agent_1.state, agent_1.STATE_WALKING)
+	assert_almost_eq_v3(agent_1.position, Vector3(0.0, 0.2, 0.0))
+	assert_true(agent_1.set_target(Vector3(20, 0, 0)))
+	assert_almost_eq_v3(agent_1.get_target(), Vector3(20.0, 0.2, 0.0))
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(1.0, 0.2, 0.0))
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(3.0, 0.2, 0.0))
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(6.0, 0.2, 0.0))
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(9.0, 0.2, 0.0))
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(12.0, 0.2, 0.0))
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(15.0, 0.2, 0.0))
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(18.0, 0.2, 0.0))
+	for _i in range(60):
+		crowd.update(0.016666666666666666)
+	assert_almost_eq_v3(agent_1.position, Vector3(20.737211, 0.2, 0.0))  # overshoot
+	for _i in range(60):
+		crowd.update(0.016666666666666666)
+	assert_almost_eq_v3(agent_1.position, Vector3(22.512211, 0.2, 0.0))  # slowing down
+	for _i in range(60 * 11):  # ~11s required to stabilize
+		crowd.update(0.016666666666666666)
+	assert_almost_eq_v3(agent_1.position, Vector3(20.0, 0.2, 0.0))
