@@ -86,12 +86,12 @@ func test_add_agent_off_mesh_succeeded():
 	assert(crowd)
 	var agent_1_config = AdvancedNavigationServer3D.create_empty_detour_crowd_agent_config()
 	assert_true(agent_1_config != null)
-	var agent_1_start_pos = Vector3(0, 5, 0)
+	var agent_1_start_pos = Vector3(0, 99999, 0)
 	var agent_1 = crowd.create_agent(agent_1_start_pos, agent_1_config)
 	assert_true(agent_1 != null)
 	assert_eq(agent_1.state, agent_1.STATE_INVALID)
 	var agent_1_actual_pos = agent_1.position
-	assert_almost_eq_v3(agent_1_actual_pos, Vector3(0, 5, 0))
+	assert_almost_eq_v3(agent_1_actual_pos, Vector3(0, 99999, 0))
 
 
 func test_small_step_for_agent_but_big_setp_for_mankind():
@@ -115,8 +115,7 @@ func test_small_step_for_agent_but_big_setp_for_mankind():
 	assert(crowd)
 	var agent_1_config = AdvancedNavigationServer3D.create_empty_detour_crowd_agent_config()
 	assert_true(agent_1_config != null)
-	var agent_1_start_pos = navmesh.get_closest_point(Vector3(-5, 0, -5))
-	var agent_1 = crowd.create_agent(agent_1_start_pos, agent_1_config)  # consider auto-alignment so that we don't need to "get_closest_point"
+	var agent_1 = crowd.create_agent(Vector3(-5, 10, -5), agent_1_config)
 	assert_true(agent_1 != null)
 	assert_eq(agent_1.state, agent_1.STATE_WALKING)
 	assert_almost_eq_v3(agent_1.position, Vector3(-4.1, 0.2, -4.1))
@@ -147,8 +146,7 @@ func test_agent_acceleration_and_speed():
 	var agent_1_config = AdvancedNavigationServer3D.create_empty_detour_crowd_agent_config()
 	agent_1_config.max_acceleration = 1.0
 	agent_1_config.max_speed = 3.0
-	var agent_1_start_pos = navmesh.get_closest_point(Vector3(0, 0, 0))
-	var agent_1 = crowd.create_agent(agent_1_start_pos, agent_1_config)  # consider auto-alignment so that we don't need to "get_closest_point"
+	var agent_1 = crowd.create_agent(Vector3(0, 0, 0), agent_1_config)
 	assert_eq(agent_1.state, agent_1.STATE_WALKING)
 	assert_almost_eq_v3(agent_1.position, Vector3(0.0, 0.2, 0.0))
 	assert_true(agent_1.set_target(Vector3(20, 0, 0)))
@@ -204,8 +202,7 @@ func test_agent_acceleration_and_speed_with_dense_updates():
 	var agent_1_config = AdvancedNavigationServer3D.create_empty_detour_crowd_agent_config()
 	agent_1_config.max_acceleration = 1.0
 	agent_1_config.max_speed = 3.0
-	var agent_1_start_pos = navmesh.get_closest_point(Vector3(0, 0, 0))
-	var agent_1 = crowd.create_agent(agent_1_start_pos, agent_1_config)  # consider auto-alignment so that we don't need to "get_closest_point"
+	var agent_1 = crowd.create_agent(Vector3(0, 0, 0), agent_1_config)
 	assert_eq(agent_1.state, agent_1.STATE_WALKING)
 	assert_almost_eq_v3(agent_1.position, Vector3(0.0, 0.2, 0.0))
 	assert_true(agent_1.set_target(Vector3(20, 0, 0)))
@@ -233,3 +230,41 @@ func test_agent_acceleration_and_speed_with_dense_updates():
 	for _i in range(60 * 11):  # ~11s required to stabilize
 		crowd.update(0.016666666666666666)
 	assert_almost_eq_v3(agent_1.position, Vector3(20.0, 0.2, 0.0))
+
+
+func test_agent_speed_increase():
+	# input:
+	var input_geometry = AdvancedNavigationServer3D.create_empty_input_geometry()
+	var plane_mesh = PlaneMesh.new()
+	plane_mesh.size = Vector2(100, 100)
+	input_geometry.add_resources([plane_mesh])
+
+	# config:
+	var recast_config = AdvancedNavigationServer3D.create_empty_recast_polygon_mesh_config()
+	var detour_config = AdvancedNavigationServer3D.create_empty_detour_navigation_mesh_config()
+	var crowd_config = AdvancedNavigationServer3D.create_empty_detour_crowd_config()
+
+	# navmesh:
+	var navmesh = AdvancedNavigationServer3D.create_empty_detour_navigation_mesh()
+	navmesh.build_from_input_geometry(input_geometry, recast_config, detour_config)
+
+	# crowd:
+	var crowd = navmesh.create_crowd(crowd_config)
+	var agent_1_config = AdvancedNavigationServer3D.create_empty_detour_crowd_agent_config()
+	agent_1_config.max_acceleration = 1.0
+	agent_1_config.max_speed = 3.0
+	var agent_1 = crowd.create_agent(Vector3(0, 0, 0), agent_1_config)
+	assert_eq(agent_1.state, agent_1.STATE_WALKING)
+	assert_almost_eq_v3(agent_1.position, Vector3(0.0, 0.2, 0.0))
+	assert_true(agent_1.set_target(Vector3(20, 0, 0)))
+	assert_almost_eq(agent_1.velocity.length(), 0.0, EPSILON)
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(1.0, 0.2, 0.0))
+	assert_almost_eq(agent_1.velocity.length(), 1.0, EPSILON)
+	crowd.update(0.5)
+	assert_almost_eq_v3(agent_1.position, Vector3(1.75, 0.2, 0.0))
+	assert_almost_eq(agent_1.velocity.length(), 1.5, EPSILON)
+
+
+func test_agent_avoiding_agent():
+	pass
