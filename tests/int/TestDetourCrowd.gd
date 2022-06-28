@@ -178,7 +178,7 @@ func test_agent_acceleration_and_speed():
 	crowd.update(1.0)
 	assert_almost_eq_v3(agent_1.position, Vector3(21.0, 0.2, 0.0))  # going back
 	crowd.update(1.0)
-	assert_almost_eq_v3(agent_1.position, Vector3(18.5, 0.2, 0.0))  # overshoot again
+	assert_almost_eq_v3(agent_1.position, Vector3(18.536127, 0.2, -0.006896))  # overshoot again
 
 
 func test_agent_acceleration_and_speed_with_dense_updates():
@@ -267,4 +267,58 @@ func test_agent_speed_increase():
 
 
 func test_agent_avoiding_agent():
-	pass
+	# input:
+	var input_geometry = AdvancedNavigationServer3D.create_empty_input_geometry()
+	var plane_mesh = PlaneMesh.new()
+	plane_mesh.size = Vector2(100, 100)
+	input_geometry.add_resources([plane_mesh])
+
+	# config:
+	var recast_config = AdvancedNavigationServer3D.create_empty_recast_polygon_mesh_config()
+	var detour_config = AdvancedNavigationServer3D.create_empty_detour_navigation_mesh_config()
+	var crowd_config = AdvancedNavigationServer3D.create_empty_detour_crowd_config()
+
+	# navmesh:
+	var navmesh = AdvancedNavigationServer3D.create_empty_detour_navigation_mesh()
+	navmesh.build_from_input_geometry(input_geometry, recast_config, detour_config)
+
+	# crowd:
+	var crowd = navmesh.create_crowd(crowd_config)
+	var agent_1_config = AdvancedNavigationServer3D.create_empty_detour_crowd_agent_config()
+	agent_1_config.radius = 0.6
+	agent_1_config.max_acceleration = 0.6
+	agent_1_config.max_speed = 1.2
+	agent_1_config.collision_query_range = agent_1_config.radius * 8
+	agent_1_config.separation_weight = 0
+	var agent_2_config = AdvancedNavigationServer3D.create_empty_detour_crowd_agent_config()
+	agent_2_config.radius = 0.6
+	agent_2_config.max_acceleration = 0.6
+	agent_2_config.max_speed = 1.2
+	agent_2_config.collision_query_range = agent_2_config.radius * 8
+	agent_2_config.separation_weight = 0
+	var agent_1 = crowd.create_agent(Vector3(0, 0, 0), agent_1_config)
+	var agent_2 = crowd.create_agent(Vector3(10, 0, 0), agent_2_config)
+	assert_eq(agent_1.state, agent_1.STATE_WALKING)
+	assert_eq(agent_2.state, agent_1.STATE_WALKING)
+	assert_almost_eq_v3(agent_1.position, Vector3(0.0, 0.2, 0.0))
+	assert_almost_eq_v3(agent_2.position, Vector3(10.0, 0.2, 0.0))
+	assert_true(agent_1.set_target(Vector3(10, 0, 0)))
+	assert_true(agent_2.set_target(Vector3(0, 0, 0)))
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(0.6, 0.2, 0.0))
+	assert_almost_eq_v3(agent_2.position, Vector3(9.4, 0.2, 0.0))
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(1.8, 0.2, 0.0))
+	assert_almost_eq_v3(agent_2.position, Vector3(8.2, 0.2, 0.0))
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(3.0, 0.2, 0.0))
+	assert_almost_eq_v3(agent_2.position, Vector3(7.0, 0.2, 0.0))
+	crowd.update(1.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(4.07, 0.2, -0.33))
+	assert_almost_eq_v3(agent_2.position, Vector3(5.92, 0.2, 0.33))
+	crowd.update(0.3)
+	assert_almost_eq_v3(agent_1.position, Vector3(4.38, 0.2, -0.44))
+	assert_almost_eq_v3(agent_2.position, Vector3(5.61, 0.2, 0.44))
+	crowd.update(0.55)
+	assert_almost_eq_v3(agent_1.position, Vector3(4.97, 0.2, -0.62))
+	assert_almost_eq_v3(agent_2.position, Vector3(5.02, 0.2, 0.62))
