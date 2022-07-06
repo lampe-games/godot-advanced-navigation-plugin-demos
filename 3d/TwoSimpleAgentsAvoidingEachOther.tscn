@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://addons/godot-advanced-navigation-plugin/nodes/AdvancedNavigationMesh3D.gdns" type="Script" id=1]
+[ext_resource path="res://addons/godot-advanced-navigation-plugin/advancednavigation.gdnlib" type="GDNativeLibrary" id=2]
+[ext_resource path="res://3d/utils/SimpleAgent.tscn" type="PackedScene" id=5]
+
+[sub_resource type="SpatialMaterial" id=1]
+render_priority = 127
+flags_transparent = true
+flags_unshaded = true
+albedo_color = Color( 1, 0, 0, 0.4 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="NativeScript" id=8]
+class_name = "DetourNavigationMesh"
+library = ExtResource( 2 )
+
+[sub_resource type="Resource" id=9]
+script = SubResource( 8 )
+serialized_detour_navigation_mesh = PoolByteArray( 86, 65, 78, 68, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 64, 0, 0, 0, 63, 0, 0, 64, 63, 0, 0, 160, 192, 0, 0, 0, 0, 0, 0, 160, 192, 0, 0, 160, 64, 0, 0, 0, 64, 0, 0, 160, 64, 0, 0, 128, 64, 0, 0, 136, 192, 0, 0, 128, 62, 0, 0, 136, 192, 0, 0, 136, 192, 0, 0, 128, 62, 0, 0, 136, 64, 0, 0, 136, 64, 0, 0, 128, 62, 0, 0, 136, 64, 0, 0, 136, 64, 0, 0, 128, 62, 0, 0, 136, 192, 255, 255, 255, 255, 0, 0, 1, 0, 2, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 4, 63, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 3, 0, 2, 17, 0, 1, 2, 5 )
+
+[sub_resource type="PlaneMesh" id=3]
+size = Vector2( 10, 10 )
+
+[node name="Demo" type="Spatial"]
+
+[node name="AdvancedNavigationMesh3D" type="Spatial" parent="."]
+script = ExtResource( 1 )
+cell/size = 0.25
+cell/height = 0.25
+agent/radius = 0.5
+agent/max_climb = 0.75
+debug/transparent_mesh_material = SubResource( 1 )
+debug/solid_mesh_material = SubResource( 2 )
+navigation_mesh = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="AdvancedNavigationMesh3D"]
+mesh = SubResource( 3 )
+
+[node name="SimpleAgent" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.05026 )
+distance_to_walk = 10.0
+
+[node name="AdvancedNavigationAgent3D" parent="SimpleAgent" index="2"]
+max_speed = 2.0
+
+[node name="SimpleAgent2" parent="." instance=ExtResource( 5 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -4.09784 )
+distance_to_walk = 10.0
+
+[node name="AdvancedNavigationAgent3D" parent="SimpleAgent2" index="2"]
+max_speed = 2.0
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 5.83359, 5.37256, 5.93455 )
+projection = 1
+size = 20.0
+
+[editable path="SimpleAgent"]
+[editable path="SimpleAgent2"]
