@@ -15,5 +15,7 @@ func _ready():
 		_agent.set_target(target)
 
 
-func _on_new_position(p):
-	global_transform.origin = p
+func _on_new_position(new_position):
+	if global_transform.origin * Vector3(1, 0, 1) != new_position * Vector3(1, 0, 1):
+		global_transform = global_transform.looking_at(new_position, Vector3.UP)
+	global_transform.origin = new_position

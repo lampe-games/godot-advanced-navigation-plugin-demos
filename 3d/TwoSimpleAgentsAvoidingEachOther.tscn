@@ -44,14 +44,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.05026 )
 distance_to_walk = 10.0
 
 [node name="AdvancedNavigationAgent3D" parent="SimpleAgent" index="2"]
-max_speed = 2.0
+max_speed = 2.5
 
 [node name="SimpleAgent2" parent="." instance=ExtResource( 5 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -4.09784 )
 distance_to_walk = 10.0
 
 [node name="AdvancedNavigationAgent3D" parent="SimpleAgent2" index="2"]
-max_speed = 2.0
+max_speed = 2.5
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 5.83359, 5.37256, 5.93455 )
