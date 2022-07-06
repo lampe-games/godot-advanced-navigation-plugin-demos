@@ -125,6 +125,35 @@ func test_small_step_for_agent_but_big_setp_for_mankind():
 	assert_almost_eq_v3(agent_1.position, Vector3(4.0, 0.2, 4.0))
 
 
+func test_agent_movement_interrupted():
+	# input:
+	var input_geometry = AdvancedNavigationServer3D.create_empty_input_geometry()
+	var plane_mesh = PlaneMesh.new()
+	plane_mesh.size = Vector2(10, 10)
+	input_geometry.add_resources([plane_mesh])
+
+	# config:
+	var recast_config = AdvancedNavigationServer3D.create_empty_recast_polygon_mesh_config()
+	var detour_config = AdvancedNavigationServer3D.create_empty_detour_navigation_mesh_config()
+	var crowd_config = AdvancedNavigationServer3D.create_empty_detour_crowd_config()
+
+	# navmesh:
+	var navmesh = AdvancedNavigationServer3D.create_empty_detour_navigation_mesh()
+	navmesh.build_from_input_geometry(input_geometry, recast_config, detour_config)
+
+	# crowd:
+	var crowd = navmesh.create_crowd(crowd_config)
+	assert(crowd)
+	var agent_1_config = AdvancedNavigationServer3D.create_empty_detour_crowd_agent_config()
+	var agent_1 = crowd.create_agent(Vector3(-5, 10, -5), agent_1_config)
+	assert_almost_eq_v3(agent_1.position, Vector3(-4.1, 0.2, -4.1))
+	assert_true(agent_1.set_target(Vector3(5, 0, 5)))
+	assert_almost_eq_v3(agent_1.get_target(), Vector3(4.0, 0.2, 4.0))
+	assert_true(agent_1.set_target(Vector3.INF))
+	crowd.update(999.0)
+	assert_almost_eq_v3(agent_1.position, Vector3(-4.1, 0.2, -4.1))
+
+
 func test_agent_acceleration_and_speed():
 	# input:
 	var input_geometry = AdvancedNavigationServer3D.create_empty_input_geometry()

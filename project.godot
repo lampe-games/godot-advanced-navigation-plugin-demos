@@ -18,6 +18,10 @@ config/icon="res://icon.png"
 
 AdvancedNavigationServer3D="*res://addons/godot-advanced-navigation-plugin/nodes/AdvancedNavigationServer3D.gdns"
 
+[debug]
+
+gdscript/warnings/return_value_discarded=false
+
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/godot-advanced-navigation-plugin/plugin.cfg", "res://addons/gut/plugin.cfg" )
