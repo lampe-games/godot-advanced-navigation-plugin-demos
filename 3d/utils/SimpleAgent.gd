@@ -3,12 +3,12 @@ extends Spatial
 export var distance_to_walk := 0.0
 
 onready var _agent = find_node("AdvancedNavigationAgent3D")
-onready var _navmesh = get_node("/root").find_node("AdvancedNavigationMesh3D", true, false)
+onready var _navigation_crowd = get_node("/root").find_node("AdvancedNavigationCrowd3D", true, false)
 
 
 func _ready():
 	_agent.connect("new_position", self, "_on_new_position")
-	_agent.set_navigation_mesh(_navmesh)
+	_agent.set_navigation_crowd(_navigation_crowd)
 	_agent.set_position(global_transform.origin)
 	if distance_to_walk > 0.0:
 		var target = global_transform * Vector3(0, 0, -distance_to_walk)
