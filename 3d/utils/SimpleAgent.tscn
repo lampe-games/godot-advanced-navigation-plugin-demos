@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://addons/godot-advanced-navigation-plugin/nodes/AdvancedNavigationAgent3D.gdns" type="Script" id=1]
 [ext_resource path="res://3d/utils/SimpleAgent.gd" type="Script" id=2]
+[ext_resource path="res://addons/godot-advanced-navigation-plugin/advancednavigation.gdnlib" type="GDNativeLibrary" id=3]
 
 [sub_resource type="CapsuleMesh" id=6]
 radius = 0.5
@@ -13,6 +14,25 @@ albedo_color = Color( 0, 0, 0, 1 )
 top_radius = 0.0
 bottom_radius = 0.1
 height = 0.5
+
+[sub_resource type="NativeScript" id=9]
+class_name = "DetourCrowdAgentConfig"
+library = ExtResource( 3 )
+
+[sub_resource type="Resource" id=10]
+script = SubResource( 9 )
+radius = 0.5
+height = 2.0
+max_acceleration = 3.0
+max_speed = 2.0
+anticipate_turns = true
+obstacle_avoidance = true
+collision_query_range = 2.0
+optimize_path_visibility = true
+optimize_path_topology = true
+path_optimization_range = 18.0
+separation = false
+separation_weight = 0.1
 
 [node name="SimpleAgent" type="Spatial"]
 script = ExtResource( 2 )
@@ -31,4 +51,5 @@ script = ExtResource( 1 )
 radius = 0.5
 max_acceleration = 3.0
 max_speed = 2.0
-separation_weight = 0.0
+collision_query_range = 2.0
+parameters = SubResource( 10 )

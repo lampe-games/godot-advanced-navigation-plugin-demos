@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://addons/godot-advanced-navigation-plugin/nodes/AdvancedNavigationMesh3D.gdns" type="Script" id=1]
 [ext_resource path="res://addons/godot-advanced-navigation-plugin/advancednavigation.gdnlib" type="GDNativeLibrary" id=2]
@@ -22,12 +22,12 @@ library = ExtResource( 2 )
 script = SubResource( 8 )
 serialized_detour_navigation_mesh = PoolByteArray( 86, 65, 78, 68, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 64, 0, 0, 0, 63, 0, 0, 64, 63, 0, 0, 160, 192, 0, 0, 0, 0, 0, 0, 160, 192, 0, 0, 160, 64, 0, 0, 0, 64, 0, 0, 160, 64, 0, 0, 128, 64, 0, 0, 136, 192, 0, 0, 128, 62, 0, 0, 136, 192, 0, 0, 136, 192, 0, 0, 128, 62, 0, 0, 136, 64, 0, 0, 136, 64, 0, 0, 128, 62, 0, 0, 136, 64, 0, 0, 136, 64, 0, 0, 128, 62, 0, 0, 136, 192, 255, 255, 255, 255, 0, 0, 1, 0, 2, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 4, 63, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 3, 0, 2, 17, 0, 1, 2, 5 )
 
-[sub_resource type="NativeScript" id=13]
+[sub_resource type="NativeScript" id=12]
 class_name = "DetourCrowdConfig"
 library = ExtResource( 2 )
 
-[sub_resource type="Resource" id=14]
-script = SubResource( 13 )
+[sub_resource type="Resource" id=13]
+script = SubResource( 12 )
 max_agents = 25
 max_agent_radius = 0.5
 
@@ -39,21 +39,6 @@ class_name = "DetourCrowdAgentConfig"
 library = ExtResource( 2 )
 
 [sub_resource type="Resource" id=11]
-script = SubResource( 10 )
-radius = 0.5
-height = 2.0
-max_acceleration = 3.0
-max_speed = 2.5
-anticipate_turns = true
-obstacle_avoidance = true
-collision_query_range = 2.0
-optimize_path_visibility = true
-optimize_path_topology = true
-path_optimization_range = 18.0
-separation = false
-separation_weight = 0.1
-
-[sub_resource type="Resource" id=12]
 script = SubResource( 10 )
 radius = 0.5
 height = 2.0
@@ -82,16 +67,38 @@ navigation_mesh = SubResource( 9 )
 
 [node name="AdvancedNavigationCrowd3D" type="Node" parent="AdvancedNavigationMesh3D"]
 script = ExtResource( 3 )
-parameters = SubResource( 14 )
+max_agent_radius = 0.5
+parameters = SubResource( 13 )
 
 [node name="MeshInstance" type="MeshInstance" parent="AdvancedNavigationMesh3D"]
 mesh = SubResource( 3 )
 
 [node name="SimpleAgent" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.05026 )
-distance_to_walk = 10.0
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.569861, 0, 4.05026 )
+distance_to_walk = 2.0
 
 [node name="AdvancedNavigationAgent3D" parent="SimpleAgent" index="2"]
+parameters = SubResource( 11 )
+
+[node name="SimpleAgent4" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.69914, 0, 4.05026 )
+distance_to_walk = 2.0
+
+[node name="AdvancedNavigationAgent3D" parent="SimpleAgent4" index="2"]
+parameters = SubResource( 11 )
+
+[node name="SimpleAgent5" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71762, 0, 4.05026 )
+distance_to_walk = 2.0
+
+[node name="AdvancedNavigationAgent3D" parent="SimpleAgent5" index="2"]
+parameters = SubResource( 11 )
+
+[node name="SimpleAgent3" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.58243, 0, 4.05026 )
+distance_to_walk = 2.0
+
+[node name="AdvancedNavigationAgent3D" parent="SimpleAgent3" index="2"]
 parameters = SubResource( 11 )
 
 [node name="SimpleAgent2" parent="." instance=ExtResource( 5 )]
@@ -99,7 +106,7 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -
 distance_to_walk = 10.0
 
 [node name="AdvancedNavigationAgent3D" parent="SimpleAgent2" index="2"]
-parameters = SubResource( 12 )
+parameters = SubResource( 11 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 5.83359, 5.37256, 5.93455 )
@@ -107,4 +114,7 @@ projection = 1
 size = 20.0
 
 [editable path="SimpleAgent"]
+[editable path="SimpleAgent4"]
+[editable path="SimpleAgent5"]
+[editable path="SimpleAgent3"]
 [editable path="SimpleAgent2"]

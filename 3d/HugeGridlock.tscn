@@ -28,8 +28,8 @@ library = ExtResource( 3 )
 
 [sub_resource type="Resource" id=12]
 script = SubResource( 11 )
-max_agents = 25
 max_agent_radius = 0.5
+max_agents = 70
 
 [sub_resource type="PlaneMesh" id=3]
 size = Vector2( 40, 20 )
@@ -57,7 +57,6 @@ navigation_mesh = SubResource( 10 )
 
 [node name="AdvancedNavigationCrowd3D" type="Node" parent="AdvancedNavigationMesh3D"]
 script = ExtResource( 4 )
-max_agent_radius = 0.5
 parameters = SubResource( 12 )
 
 [node name="MeshInstance" type="MeshInstance" parent="AdvancedNavigationMesh3D"]
@@ -87,51 +86,283 @@ mesh = SubResource( 7 )
 
 [node name="SimpleAgent" parent="Agents" instance=ExtResource( 2 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1592, 0, 0 )
-distance_to_walk = 35.0
+distance_to_walk = 30.0
 
 [node name="SimpleAgent2" parent="Agents" instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1592, 0, -1.76906 )
-distance_to_walk = 35.0
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.7766, 0, 0 )
+distance_to_walk = 30.0
 
 [node name="SimpleAgent3" parent="Agents" instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1592, 0, -3.3414 )
-distance_to_walk = 35.0
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.4549, 0, 0 )
+distance_to_walk = 30.0
 
 [node name="SimpleAgent4" parent="Agents" instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1592, 0, -4.74295 )
-distance_to_walk = 35.0
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1592, 0, 1.27822 )
+distance_to_walk = 30.0
 
 [node name="SimpleAgent5" parent="Agents" instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1592, 0, 1.24205 )
-distance_to_walk = 35.0
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.7766, 0, 1.27822 )
+distance_to_walk = 30.0
 
 [node name="SimpleAgent6" parent="Agents" instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1592, 0, 2.68282 )
-distance_to_walk = 35.0
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.4549, 0, 1.27822 )
+distance_to_walk = 30.0
 
 [node name="SimpleAgent7" parent="Agents" instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1592, 0, 3.8337 )
-distance_to_walk = 35.0
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1592, 0, -1.30335 )
+distance_to_walk = 30.0
 
 [node name="SimpleAgent8" parent="Agents" instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1592, 0, 5.18929 )
-distance_to_walk = 35.0
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.7766, 0, -1.30335 )
+distance_to_walk = 30.0
 
 [node name="SimpleAgent9" parent="Agents" instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.8308, 0, 0.687604 )
-distance_to_walk = 35.0
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.4549, 0, -1.30335 )
+distance_to_walk = 30.0
 
 [node name="SimpleAgent10" parent="Agents" instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.8308, 0, -0.999163 )
-distance_to_walk = 35.0
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1592, 0, 2.45765 )
+distance_to_walk = 30.0
 
 [node name="SimpleAgent11" parent="Agents" instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.8308, 0, 2.17482 )
-distance_to_walk = 35.0
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.7766, 0, 2.45765 )
+distance_to_walk = 30.0
 
 [node name="SimpleAgent12" parent="Agents" instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.8308, 0, -3.04322 )
-distance_to_walk = 35.0
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.4549, 0, 2.45765 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent13" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1592, 0, -2.61086 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent14" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.7766, 0, -2.61086 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent15" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.4549, 0, -2.61086 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent16" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1592, 0, -3.95152 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent17" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.7766, 0, -3.95152 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent18" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.4549, 0, -3.95152 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent19" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1592, 0, 3.61483 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent20" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.7766, 0, 3.61483 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent21" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.4549, 0, 3.61483 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent22" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1592, 0, 4.72934 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent23" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.7766, 0, 4.72934 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent24" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.4549, 0, 4.72934 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent25" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1592, 0, -5.37392 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent26" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.7766, 0, -5.37392 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent27" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.4549, 0, -5.37392 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent28" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1592, 0, -6.703 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent29" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.7766, 0, -6.703 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent30" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.4549, 0, -6.703 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent31" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1592, 0, -7.9323 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent32" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.7766, 0, -7.9323 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent33" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.4549, 0, -7.9323 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent34" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1592, 0, 5.86096 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent35" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.7766, 0, 5.86096 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent36" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.4549, 0, 5.86096 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent37" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1592, 0, 6.97542 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent38" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.7766, 0, 6.97542 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent39" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.4549, 0, 6.97542 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent40" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1592, 0, 8.11831 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent41" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.7766, 0, 8.11831 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent42" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.4549, 0, 8.11831 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent43" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14.997, 0, 0 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent44" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14.997, 0, 1.27822 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent45" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14.997, 0, -1.30335 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent46" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14.997, 0, 2.45765 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent47" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14.997, 0, -2.61086 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent48" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14.997, 0, -3.95152 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent49" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14.997, 0, 3.61483 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent50" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14.997, 0, 4.72934 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent51" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14.997, 0, -5.37392 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent52" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14.997, 0, -6.703 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent53" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14.997, 0, -7.9323 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent54" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14.997, 0, 5.86096 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent55" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14.997, 0, 6.97542 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent56" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14.997, 0, 8.11831 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent57" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.5956, 0, 0 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent58" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.5956, 0, 1.27822 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent59" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.5956, 0, -1.30335 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent60" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.5956, 0, 2.45765 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent61" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.5956, 0, -2.61086 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent62" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.5956, 0, -3.95152 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent63" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.5956, 0, 3.61483 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent64" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.5956, 0, 4.72934 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent65" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.5956, 0, -5.37392 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent66" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.5956, 0, -6.703 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent67" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.5956, 0, -7.9323 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent68" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.5956, 0, 5.86096 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent69" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.5956, 0, 6.97542 )
+distance_to_walk = 30.0
+
+[node name="SimpleAgent70" parent="Agents" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.5956, 0, 8.11831 )
+distance_to_walk = 30.0
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0, 37.1221, 0 )

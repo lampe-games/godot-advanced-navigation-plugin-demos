@@ -3,7 +3,9 @@ extends Spatial
 export var distance_to_walk := 0.0
 
 onready var _agent = find_node("AdvancedNavigationAgent3D")
-onready var _navigation_crowd = get_node("/root").find_node("AdvancedNavigationCrowd3D", true, false)
+onready var _navigation_crowd = get_node("/root").find_node(
+	"AdvancedNavigationCrowd3D", true, false
+)
 
 
 func _ready():
